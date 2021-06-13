@@ -4,6 +4,13 @@
 <html lang="en">
 <head>
     <title>Rock-Paper-Scissors</title>
+    <style>
+        table td{
+            vertical-align:top;
+            border:solid 1px #888;
+            padding:10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,7 +34,9 @@
                     <td>${resultBoard.resultsBoard.playerDraw}</td>
                 </tr>
             </table>
+            <a href="/game">back to game</a>
         </div>
+
     </div>
 </div>
 </body>

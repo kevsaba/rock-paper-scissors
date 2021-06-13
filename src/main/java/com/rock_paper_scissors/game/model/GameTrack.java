@@ -5,9 +5,9 @@ import com.rock_paper_scissors.game.constants.GameOption;
 public class GameTrack {
     private GameOption player1played;
     private GameOption player2played;
-    private Player result;
+    private String result;
 
-    public GameTrack(GameOption player1played, GameOption player2played, Player result) {
+    public GameTrack(GameOption player1played, GameOption player2played, String result) {
         this.player1played = player1played;
         this.player2played = player2played;
         this.result = result;
@@ -22,7 +22,7 @@ public class GameTrack {
     }
 
     public String getResult() {
-        return result == null ? "Draw" : result.getName();
+        return result == null ? "Draw" : result;
     }
 
     public void clear() {

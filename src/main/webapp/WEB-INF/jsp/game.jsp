@@ -5,6 +5,13 @@
 <html lang="en">
 <head>
     <title>Rock-Paper-Scissors</title>
+    <style>
+        table td{
+            vertical-align:top;
+            border:solid 1px #888;
+            padding:10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -34,12 +41,13 @@
         </div>
         <div align="center">
             <label>Rounds Played</label>
-            <div>${rounds}</div>
+            <div>${rounds == null?0:rounds}</div>
         </div>
         <div align="center">
             <form:form action="restartCounter" method="get">
                 <input type="submit" value="Restart Game">
             </form:form>
+            <a href="/results">General results</a>
         </div>
     </div>
 </div>

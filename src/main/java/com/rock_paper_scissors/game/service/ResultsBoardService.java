@@ -14,7 +14,7 @@ public class ResultsBoardService {
     private final ResultsBoard resultsBoard;
     private long rounds = 0;
 
-    private ResultsBoardService() {
+    public ResultsBoardService() {
         this.resultsBoard = new ResultsBoard();
     }
 
