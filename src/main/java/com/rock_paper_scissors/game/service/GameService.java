@@ -7,13 +7,15 @@ import com.rock_paper_scissors.game.model.Player1;
 import com.rock_paper_scissors.game.model.Player2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+@Service
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GameService {
 
     @Autowired
@@ -39,7 +41,7 @@ public class GameService {
             winner = player2;
         }
         gameStats.add(new GameTrack(player1Selection, player2Selection, winner));
-        //resultsBoardService.updateResultsBoard(winner == null ? null : winner.getName());
+        resultsBoardService.updateResultsBoard(winner == null ? null : winner.getName());
     }
 
     public List<GameTrack> getGameStats() {
