@@ -1,10 +1,8 @@
 package com.rock_paper_scissors.game;
 
 import com.rock_paper_scissors.game.constants.GameOption;
-import com.rock_paper_scissors.game.model.GameTrack;
-import com.rock_paper_scissors.game.model.ResultsBoard;
-import com.rock_paper_scissors.game.service.GameService;
-import com.rock_paper_scissors.game.service.ResultsBoardService;
+import com.rock_paper_scissors.game.service.GameServiceImpl;
+import com.rock_paper_scissors.game.service.ResultsBoardServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,21 +19,21 @@ public class GameServiceTests {
     public static final String PLAYER_1 = "Player 1";
     public static final String PLAYER_2 = "Player 2";
     @Mock
-    private ResultsBoardService boardService;
+    private ResultsBoardServiceImpl boardService;
 
-    private GameService gameService;
+    private GameServiceImpl gameServiceImpl;
 
     @Before
     public void setUp() {
-        gameService = new GameService(boardService);
+        gameServiceImpl = new GameServiceImpl(boardService);
     }
 
     @Test
     public void testGameServiceConstructor() {
         //given
-        GameService g;
+        GameServiceImpl g;
         //when
-        g = new GameService(boardService);
+        g = new GameServiceImpl(boardService);
         //then
         Assert.assertNotNull(g.getRounds());
         Assert.assertNotNull(g.getResultsBoardService());
@@ -45,9 +43,9 @@ public class GameServiceTests {
     public void testPlayGameRound() {
         //given
         //when
-        gameService.playGameRound();
+        gameServiceImpl.playGameRound();
         //then
-        Assert.assertNotNull(gameService.getGameResult());
+        Assert.assertNotNull(gameServiceImpl.getGameResult());
         verify(boardService, times(1)).updateResultsBoard(any());
     }
 
@@ -55,7 +53,7 @@ public class GameServiceTests {
     public void testGetWinnerP1wins() {
         //given
         //when
-        String ret = gameService.getWinner(GameOption.PAPER);
+        String ret = gameServiceImpl.getWinner(GameOption.PAPER);
         //then
         Assert.assertEquals("Player 1", ret);
     }
@@ -64,7 +62,7 @@ public class GameServiceTests {
     public void testGetWinnerP2wins() {
         //given
         //when
-        String ret = gameService.getWinner(GameOption.SCISSORS);
+        String ret = gameServiceImpl.getWinner(GameOption.SCISSORS);
         //then
         Assert.assertEquals(PLAYER_2, ret);
     }
@@ -73,7 +71,7 @@ public class GameServiceTests {
     public void testGetWinnerDraw() {
         //given
         //when
-        String ret = gameService.getWinner(GameOption.ROCK);
+        String ret = gameServiceImpl.getWinner(GameOption.ROCK);
         //then
         Assert.assertNull(ret);
     }
@@ -82,12 +80,12 @@ public class GameServiceTests {
     public void testUpdateStatsValues() {
         //given
         //when
-        gameService.updateStatsValues(GameOption.SCISSORS, PLAYER_1);
+        gameServiceImpl.updateStatsValues(GameOption.SCISSORS, PLAYER_1);
         //then
-        Assert.assertEquals(1, gameService.getRounds());
-        Assert.assertEquals(GameOption.SCISSORS, gameService.getGameResult().getPlayer1played());
-        Assert.assertEquals(GameOption.ROCK, gameService.getGameResult().getPlayer2played());
-        Assert.assertEquals(PLAYER_1, gameService.getGameResult().getResult());
+        Assert.assertEquals(1, gameServiceImpl.getRounds());
+        Assert.assertEquals(GameOption.SCISSORS, gameServiceImpl.getGameResult().getPlayer1played());
+        Assert.assertEquals(GameOption.ROCK, gameServiceImpl.getGameResult().getPlayer2played());
+        Assert.assertEquals(PLAYER_1, gameServiceImpl.getGameResult().getResult());
         verify(boardService, times(1)).updateResultsBoard(PLAYER_1);
     }
 
@@ -95,9 +93,9 @@ public class GameServiceTests {
     public void testRestartGame() {
         //given
         //when
-        gameService.restartGame();
+        gameServiceImpl.restartGame();
         //then
-        Assert.assertEquals(0, gameService.getRounds());
+        Assert.assertEquals(0, gameServiceImpl.getRounds());
     }
 
 

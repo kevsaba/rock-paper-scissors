@@ -2,10 +2,7 @@ package com.rock_paper_scissors.game;
 
 import com.rock_paper_scissors.game.constants.GameOption;
 import com.rock_paper_scissors.game.model.GameTrack;
-import com.rock_paper_scissors.game.model.ResultsBoard;
-import com.rock_paper_scissors.game.service.ResultsBoardService;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
