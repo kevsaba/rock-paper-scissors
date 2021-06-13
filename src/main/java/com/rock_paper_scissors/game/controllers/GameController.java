@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class GameController {
 
@@ -16,15 +13,15 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/game")
-    public String gameView(Model model, HttpServletRequest req) {
-        model.addAttribute("gameStats", gameService.getGameStats());
+    public String gameView(Model model) {
+        setModelGame(model);
         return "game";
     }
 
     @GetMapping("/playRound")
-    public String playRound(Model model, HttpSession session) {
+    public String playRound(Model model) {
         gameService.playGame();
-        model.addAttribute("gameStats", gameService.getGameStats());
+        setModelGame(model);
         return "game";
     }
 
@@ -35,9 +32,13 @@ public class GameController {
     }
 
     @GetMapping("/results")
-    public String resultsView(Model model, HttpSession session) {
+    public String resultsView(Model model) {
         model.addAttribute("resultBoard", gameService.getResultsBoardService());
         return "results";
     }
 
+    private void setModelGame(Model model) {
+        model.addAttribute("gameStats", gameService.getGameResult());
+        model.addAttribute("rounds", gameService.getRounds());
+    }
 }

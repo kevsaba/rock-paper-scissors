@@ -20,21 +20,21 @@
             <table border="1">
                 <thead>
                 <tr>
-                    <td>Round #</td>
                     <td>Player 1</td>
                     <td>Player 2</td>
                     <td>Result</td>
                 </tr>
                 </thead>
-                <c:forEach var="gameStat" items="${gameStats}" varStatus="loop">
-                    <tr>
-                        <td>${loop.index + 1}</td>
-                        <td>${gameStat.player1played}</td>
-                        <td>${gameStat.player2played}</td>
-                        <td>${gameStat.result}</td>
-                    </tr>
-                </c:forEach>
+                <tr>
+                    <td>${gameStats.player1played}</td>
+                    <td>${gameStats.player2played}</td>
+                    <td>${gameStats.result}</td>
+                </tr>
             </table>
+        </div>
+        <div align="center">
+            <label>Rounds Played</label>
+            <div>${rounds}</div>
         </div>
         <div align="center">
             <form:form action="restartCounter" method="get">

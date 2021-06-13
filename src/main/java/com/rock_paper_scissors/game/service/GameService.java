@@ -10,10 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GameService {
@@ -21,14 +17,15 @@ public class GameService {
     @Autowired
     private ResultsBoardService resultsBoardService;
 
-    private final List<GameTrack> gameStats;
+    private GameTrack gameResult;
     private final Player1 player1;
     private final Player2 player2;
+    private long rounds;
 
     public GameService() {
-        this.gameStats = new ArrayList<>();
         this.player1 = new Player1();
         this.player2 = new Player2();
+        this.rounds = 0L;
     }
 
     public void playGame() {
@@ -40,20 +37,25 @@ public class GameService {
         } else if (player1Selection.compare(player2Selection) < 0) {
             winner = player2;
         }
-        gameStats.add(new GameTrack(player1Selection, player2Selection, winner));
+        ++rounds;
+        gameResult = new GameTrack(player1Selection, player2Selection, winner);
         resultsBoardService.updateResultsBoard(winner == null ? null : winner.getName());
     }
 
-    public List<GameTrack> getGameStats() {
-        return Collections.unmodifiableList(gameStats);
+    public void restartGame() {
+        gameResult.clear();
+        rounds = 0L;
     }
 
-    public void restartGame() {
-        gameStats.clear();
+    public GameTrack getGameResult() {
+        return gameResult;
     }
 
     public ResultsBoardService getResultsBoardService() {
         return resultsBoardService;
     }
 
+    public long getRounds() {
+        return rounds;
+    }
 }
