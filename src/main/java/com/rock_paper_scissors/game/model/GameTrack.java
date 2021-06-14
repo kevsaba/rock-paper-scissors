@@ -22,7 +22,7 @@ public class GameTrack {
     }
 
     public String getResult() {
-        return result == null ? "Draw" : result;
+        return player1played == null ? null : result == null ? "Draw" : result;
     }
 
     public void clear() {

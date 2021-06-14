@@ -16,11 +16,11 @@ public class GameTrackTests {
     @Test
     public void testUpdateResultsBoardP1Win() {
         //given
-        gameTrack = new GameTrack(GameOption.SCISSORS, GameOption.ROCK, PLAYER_1);
+        gameTrack = new GameTrack(GameOption.SCISSORS, GameOption.ROCK, PLAYER_2);
         //when
         gameTrack.clear();
         //then
-        Assert.assertNotNull(gameTrack.getResult());
+        Assert.assertNull(gameTrack.getResult());
         Assert.assertNull(gameTrack.getPlayer1played());
         Assert.assertNull(gameTrack.getPlayer2played());
     }
